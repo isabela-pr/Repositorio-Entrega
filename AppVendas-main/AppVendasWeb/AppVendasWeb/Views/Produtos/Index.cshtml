@@ -6,11 +6,11 @@
 
 <h1 class="display-5 text-light my-5">Cadastro de Produtos</h1>
 
-<p>
-    <a asp-action="Create" class="btn btn-lg btn-outline-light d-inline-flex align-items-center">
-        <svg class="me-3" bootstrap-icon="PlusLg" width="20" height="20" aria-label="Adicionar"></svg> Adicionar
-    </a>
-</p>
+<a asp-controller="Produtos" asp-action="Create" class="btn btn-lg btn-outline-light p-5 ">
+    <svg bootstrap-icon="CartPlusFill" width="32" height="32" aria-label="Descricao" class="mb-3"></svg>
+    <br />Descrição do Produto
+</a>
+
 <table class="table table-dark table-striped table-hover">
     <thead>
         <tr>

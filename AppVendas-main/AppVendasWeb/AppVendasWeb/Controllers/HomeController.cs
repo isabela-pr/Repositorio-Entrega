@@ -73,7 +73,23 @@ namespace AppVendasWeb.Controllers
             List<Produto> listaProdutos = _context.Produtos.OrderBy(p => p.Descricao).ToList();
             ViewData["ListaClientes"] = listaClientes;
             ViewData["ListaProdutos"] = listaProdutos;
-            //Lógica para salvar a venda
+
+            if (novaVenda.ClienteId.ToString() == "00000000-0000-0000-0000-000000000000")
+            {
+                return View("IniciarVenda");
+            }
+
+            novaVenda.NovaVendaId = Guid.NewGuid();
+            novaVenda.Cliente = _context.Cliente.FirstOrDefault(c => c.ClienteId == novaVenda.ClienteId);
+            var ultimaNotaFiscal = _context.NovaVendas.Max(v => v.NotaFiscal);
+            if (ultimaNotaFiscal == null)
+            {
+                ultimaNotaFiscal = 0;
+            }
+            novaVenda.NotaFiscal = ultimaNotaFiscal + 1;
+            _context.Add(novaVenda);
+            await _context.SaveChangesAsync();
+
 
             return View("IniciarVenda", novaVenda);
         }
